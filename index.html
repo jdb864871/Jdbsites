@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecoa, agenda por voz</title>
+<style>
+:root { --bg:#0A1530; --panel:#0E1D40; --text:#EEF2FA; --muted:#A9B4CC; --lime:#C6F24E; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+main { max-width:720px; margin:0 auto; padding:40px 16px 64px; }
+h1 { font-size:28px; margin:0 0 4px; color:var(--lime); }
+.date { color:var(--muted); margin:0 0 28px; }
+h2 { font-size:19px; margin:28px 0 8px; }
+p { margin:0 0 10px; color:var(--text); }
+a { color:var(--lime); }
+</style>
+<style>.box { background:var(--panel); border-radius:18px; padding:24px; margin:24px 0; } .hide { display:none; }</style>
+</head>
+<body>
+<main>
+<h1>Ecoa</h1>
+<p class="date">Sua agenda por voz</p>
+<div id="ok" class="box hide"><h2>Pagamento confirmado!</h2><p>Obrigado por assinar o Ecoa. Pode voltar para o aplicativo: em alguns segundos sua assinatura aparece ativa no Perfil. Se não aparecer, toque em “Já paguei, verificar”.</p></div>
+<div id="cancel" class="box hide"><h2>Pagamento não concluído</h2><p>Nada foi cobrado. Quando quiser, é só voltar ao aplicativo e tocar em “Assinar agora”.</p></div>
+<div id="portal" class="box hide"><h2>Tudo certo</h2><p>Suas alterações na assinatura foram salvas. Pode voltar para o aplicativo.</p></div>
+<p>Marque, mude e cancele compromissos só falando. A Ecoa entende do seu jeito, pergunta quando fica em dúvida e te avisa na hora certa.</p>
+<p><a href="privacidade-ecoa.html">Política de privacidade</a> · <a href="excluir-conta.html">Excluir conta</a> · <a href="mailto:jdbsites1@gmail.com">jdbsites1@gmail.com</a></p>
+</main>
+<script>
+var q = new URLSearchParams(location.search).get('assinatura');
+var id = q === 'ok' ? 'ok' : q === 'cancelada' ? 'cancel' : document.referrer.indexOf('billing.stripe.com') > -1 ? 'portal' : '';
+if (id) document.getElementById(id).classList.remove('hide');
+</script>
+</body>
+</html>
