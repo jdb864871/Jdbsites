@@ -4,28 +4,71 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ecoa, agenda por voz</title>
+<meta name="description" content="Ecoa é um aplicativo de agenda por voz para Android. Assinatura mensal de R$ 19,90 com 7 dias grátis.">
 <style>
 :root { --bg:#0A1530; --panel:#0E1D40; --text:#EEF2FA; --muted:#A9B4CC; --lime:#C6F24E; }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
 main { max-width:720px; margin:0 auto; padding:40px 16px 64px; }
-h1 { font-size:28px; margin:0 0 4px; color:var(--lime); }
+h1 { font-size:32px; margin:0 0 4px; color:var(--lime); }
 .date { color:var(--muted); margin:0 0 28px; }
-h2 { font-size:19px; margin:28px 0 8px; }
+h2 { font-size:19px; margin:32px 0 8px; }
 p { margin:0 0 10px; color:var(--text); }
+ul { margin:0 0 10px; padding-left:20px; }
+li { margin:0 0 6px; }
 a { color:var(--lime); }
+.box { background:var(--panel); border-radius:18px; padding:24px; margin:24px 0; }
+.hide { display:none; }
+.price { font-size:36px; font-weight:700; color:var(--lime); margin:0; }
+.small { color:var(--muted); font-size:14px; }
+footer { margin-top:40px; padding-top:20px; border-top:1px solid #1F2E55; color:var(--muted); font-size:14px; }
+footer p { color:var(--muted); }
 </style>
-<style>.box { background:var(--panel); border-radius:18px; padding:24px; margin:24px 0; } .hide { display:none; }</style>
 </head>
 <body>
 <main>
 <h1>Ecoa</h1>
-<p class="date">Sua agenda por voz</p>
+<p class="date">Sua agenda por voz, para Android</p>
+
 <div id="ok" class="box hide"><h2>Pagamento confirmado!</h2><p>Obrigado por assinar o Ecoa. Pode voltar para o aplicativo: em alguns segundos sua assinatura aparece ativa no Perfil. Se não aparecer, toque em “Já paguei, verificar”.</p></div>
 <div id="cancel" class="box hide"><h2>Pagamento não concluído</h2><p>Nada foi cobrado. Quando quiser, é só voltar ao aplicativo e tocar em “Assinar agora”.</p></div>
 <div id="portal" class="box hide"><h2>Tudo certo</h2><p>Suas alterações na assinatura foram salvas. Pode voltar para o aplicativo.</p></div>
-<p>Marque, mude e cancele compromissos só falando. A Ecoa entende do seu jeito, pergunta quando fica em dúvida e te avisa na hora certa.</p>
-<p><a href="privacidade-ecoa.html">Política de privacidade</a> · <a href="excluir-conta.html">Excluir conta</a> · <a href="mailto:jdbsites1@gmail.com">jdbsites1@gmail.com</a></p>
+
+<p>O Ecoa é um aplicativo de agenda que você usa falando. Você diz “marca dentista quinta às 3 da tarde e me avisa uma hora antes” e ele cria o compromisso e agenda o lembrete. Também dá para mudar, remarcar e cancelar do mesmo jeito, ou digitar se preferir.</p>
+
+<h2>O que o app faz</h2>
+<ul>
+<li>Cria, altera e cancela compromissos por voz ou por texto.</li>
+<li>Entende datas do dia a dia: “amanhã”, “sexta que vem”, “todo sábado às 9”.</li>
+<li>Pergunta quando fica em dúvida, por exemplo quando existem dois compromissos com o mesmo nome.</li>
+<li>Avisa antes de cada compromisso, de 10 minutos até 1 dia de antecedência.</li>
+<li>Responde falando, se você quiser.</li>
+<li>Mostra tudo na tela antes de salvar. Nada muda na agenda sem sua confirmação.</li>
+</ul>
+
+<h2>Preço</h2>
+<div class="box">
+<p class="price">R$ 19,90 por mês</p>
+<p>Assinatura mensal com renovação automática. Os <strong>primeiros 7 dias são grátis</strong> e não pedimos cartão para testar.</p>
+<p class="small">Pagamento com cartão de crédito, processado pelo Stripe. O valor é cobrado no dia em que você assina e depois a cada mês, na mesma data.</p>
+</div>
+
+<h2>Como assinar</h2>
+<p>1. Instale o Ecoa no seu Android e crie sua conta com e-mail e senha.</p>
+<p>2. Use à vontade durante os 7 dias de teste.</p>
+<p>3. Para continuar, abra o Perfil e toque em “Assinar o Ecoa”. O pagamento é feito numa página segura do Stripe.</p>
+
+<h2>Cancelamento e reembolso</h2>
+<p>Você cancela quando quiser, sem multa, no próprio app: Perfil, “Gerenciar assinatura”. O acesso continua até o fim do mês que já foi pago e não há novas cobranças.</p>
+<p>Se você se arrepender em até 7 dias depois do primeiro pagamento, devolvemos o valor integral. É só pedir por e-mail. Os detalhes estão nos <a href="termos-ecoa.html">Termos de uso</a>.</p>
+
+<h2>Contato e suporte</h2>
+<p>E-mail: <a href="mailto:jdbsites1@gmail.com">jdbsites1@gmail.com</a>. Respondemos em até 2 dias úteis.</p>
+
+<footer>
+<p>Ecoa é desenvolvido por JDB Sites, de Jefferson Deniz Buiar, Curitiba, PR, Brasil.</p>
+<p><a href="termos-ecoa.html">Termos de uso</a> · <a href="privacidade-ecoa.html">Política de privacidade</a> · <a href="excluir-conta.html">Excluir conta</a></p>
+</footer>
 </main>
 <script>
 var q = new URLSearchParams(location.search).get('assinatura');
