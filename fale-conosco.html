@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fale com o Ecoa</title>
+<meta name="description" content="Peça ajuda, faça uma reclamação, mande uma sugestão ou um agradecimento para a equipe do Ecoa.">
+<style>
+:root { --bg:#0A1530; --panel:#0E1D40; --field:#1A3570; --border:#6F8FD6; --text:#EEF2FA; --muted:#A9B4CC; --lime:#C6F24E; --onlime:#14210A; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+main { max-width:720px; margin:0 auto; padding:40px 16px 64px; }
+nav { display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 28px; font-size:15px; }
+h1 { font-size:30px; margin:0 0 4px; color:var(--lime); }
+.date { color:var(--muted); margin:0 0 24px; }
+h2 { font-size:20px; margin:30px 0 10px; }
+p { margin:0 0 10px; }
+a { color:var(--lime); }
+.kinds { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:18px 0 8px; }
+.kind { background:var(--panel); border:2px solid transparent; border-radius:18px; padding:16px; text-align:left; color:var(--text); font:inherit; cursor:pointer; }
+.kind strong { display:block; font-size:18px; margin-bottom:2px; }
+.kind span { color:var(--muted); font-size:14px; line-height:1.4; display:block; }
+.kind[aria-pressed="true"] { border-color:var(--lime); background:#13265A; }
+.kind:focus-visible, input:focus-visible, textarea:focus-visible, button:focus-visible { outline:3px solid var(--lime); outline-offset:2px; }
+form { background:var(--panel); border-radius:18px; padding:22px; margin:18px 0; }
+label { display:block; font-weight:600; margin:14px 0 6px; }
+label:first-child { margin-top:0; }
+.opt { color:var(--muted); font-weight:400; font-size:14px; }
+input, textarea { width:100%; background:var(--field); color:var(--text); border:1.5px solid var(--border); border-radius:14px; padding:13px 14px; font:inherit; }
+textarea { min-height:150px; resize:vertical; }
+input::placeholder, textarea::placeholder { color:#A3B1D1; }
+.send { margin-top:18px; width:100%; background:var(--lime); color:var(--onlime); border:0; border-radius:999px; padding:15px; font:inherit; font-weight:700; cursor:pointer; }
+.hint { color:var(--muted); font-size:14px; margin-top:10px; }
+.err { color:#FF8A7A; font-size:15px; margin-top:10px; min-height:1em; }
+.box { background:var(--panel); border-radius:18px; padding:20px 22px; margin:18px 0; }
+.hide { display:none; }
+footer { margin-top:44px; padding-top:20px; border-top:1px solid #1F2E55; color:var(--muted); font-size:14px; }
+footer p { color:var(--muted); }
+@media (max-width:420px) { .kinds { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+<nav><a href="index.html">Início</a><a href="como-usar.html">Como usar</a><a href="fale-conosco.html">Fale conosco</a></nav>
+
+<h1>Fale com a gente</h1>
+<p class="date">Toda mensagem é lida por uma pessoa. Respondemos em até 2 dias úteis.</p>
+
+<p>Antes de escrever, vale olhar o <a href="como-usar.html">guia Como usar</a>. Muitas dúvidas já estão respondidas lá.</p>
+
+<h2>Sobre o que você quer falar?</h2>
+<div class="kinds" role="group" aria-label="Tipo de mensagem">
+  <button type="button" class="kind" data-kind="Ajuda" aria-pressed="true"><strong>Ajuda</strong><span>Dúvida ou algo que não está funcionando</span></button>
+  <button type="button" class="kind" data-kind="Reclamação" aria-pressed="false"><strong>Reclamação</strong><span>Algo te deixou insatisfeito</span></button>
+  <button type="button" class="kind" data-kind="Sugestão" aria-pressed="false"><strong>Sugestão</strong><span>Uma ideia para o Ecoa ficar melhor</span></button>
+  <button type="button" class="kind" data-kind="Agradecimento" aria-pressed="false"><strong>Agradecimento</strong><span>O Ecoa te ajudou? Conta pra gente</span></button>
+</div>
+
+<form id="f" novalidate>
+  <label for="nome">Seu nome <span class="opt">(opcional)</span></label>
+  <input id="nome" autocomplete="name" maxlength="120" placeholder="Como podemos te chamar">
+
+  <label for="email">E-mail da sua conta no Ecoa <span class="opt">(ajuda a achar sua conta)</span></label>
+  <input id="email" type="email" autocomplete="email" maxlength="200" placeholder="voce@exemplo.com">
+
+  <label for="msg" id="msgLabel">Conte o que aconteceu</label>
+  <textarea id="msg" maxlength="4000" placeholder="Ex.: pedi para marcar dentista sexta às 10 e ele marcou na quinta."></textarea>
+
+  <div class="err" id="err" role="alert"></div>
+  <button class="send" type="submit" id="sendBtn">Enviar mensagem</button>
+  <p class="hint">Ao tocar em enviar, abre o seu aplicativo de e-mail com a mensagem pronta. É só confirmar o envio por lá.</p>
+</form>
+
+<div class="box hide" id="after">
+  <p><strong>Seu e-mail abriu?</strong> Confirme o envio no aplicativo de e-mail.</p>
+  <p>Se nada abriu, mande direto para <a href="mailto:jdbsites1@gmail.com">jdbsites1@gmail.com</a> com o assunto “Ecoa” e a sua mensagem.</p>
+</div>
+
+<h2>Outras formas</h2>
+<p>E-mail: <a href="mailto:jdbsites1@gmail.com?subject=Ecoa">jdbsites1@gmail.com</a></p>
+<p>Quer cancelar a assinatura? Você faz isso sozinho no app, em Perfil, “Gerenciar assinatura”. Reembolso em até 7 dias do primeiro pagamento: veja os <a href="termos-ecoa.html">Termos de uso</a>.</p>
+
+<footer>
+<p>Ecoa é desenvolvido por JDB Sites, de Jefferson Deniz Buiar, Curitiba, PR, Brasil.</p>
+<p><a href="termos-ecoa.html">Termos de uso</a> · <a href="privacidade-ecoa.html">Política de privacidade</a> · <a href="excluir-conta.html">Excluir conta</a></p>
+</footer>
+</main>
+<script>
+(function () {
+  var TO = 'jdbsites1@gmail.com';
+  var kind = 'Ajuda';
+  var prompts = {
+    'Ajuda': ['Conte o que aconteceu', 'Ex.: pedi para marcar dentista sexta às 10 e ele marcou na quinta.'],
+    'Reclamação': ['Conte o que te deixou insatisfeito', 'Pode falar à vontade. Quanto mais detalhe, mais rápido a gente resolve.'],
+    'Sugestão': ['Qual é a sua ideia?', 'Ex.: seria ótimo poder compartilhar um compromisso com a família.'],
+    'Agradecimento': ['Deixe seu recado', 'Ficamos muito felizes em saber como o Ecoa te ajudou.']
+  };
+  var buttons = document.querySelectorAll('.kind');
+  var msg = document.getElementById('msg');
+  var label = document.getElementById('msgLabel');
+  var err = document.getElementById('err');
+
+  function pick(k) {
+    kind = k;
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.kind === k ? 'true' : 'false'); });
+    label.textContent = prompts[k][0];
+    msg.placeholder = prompts[k][1];
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.kind); }); });
+
+  var pre = new URLSearchParams(location.search).get('tipo');
+  var map = { ajuda: 'Ajuda', reclamacao: 'Reclamação', sugestao: 'Sugestão', agradecimento: 'Agradecimento' };
+  if (pre && map[pre]) pick(map[pre]);
+
+  document.getElementById('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nome = document.getElementById('nome').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var texto = msg.value.trim();
+    err.textContent = '';
+    if (texto.length < 5) { err.textContent = 'Escreva sua mensagem antes de enviar.'; msg.focus(); return; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Confira o e-mail, parece que falta alguma coisa.'; document.getElementById('email').focus(); return; }
+    var subject = 'Ecoa: ' + kind + (nome ? ' de ' + nome : '');
+    var body = texto + '\n\n' +
+      'Tipo: ' + kind + '\n' +
+      (nome ? 'Nome: ' + nome + '\n' : '') +
+      (email ? 'E-mail da conta: ' + email + '\n' : '') +
+      'Enviado pela página Fale conosco';
+    location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    document.getElementById('after').classList.remove('hide');
+  });
+})();
+</script>
+</body>
+</html>
